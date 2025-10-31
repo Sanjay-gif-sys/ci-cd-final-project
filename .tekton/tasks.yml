@@ -21,12 +21,9 @@ spec:
         #!/usr/bin/env sh
         set -eu
         echo "Removing all files from ${WORKSPACE_SOURCE_PATH} ..."
-        if [ -d "${WORKSPACE_SOURCE_PATH}" ] ; then
-          # Delete non-hidden files and directories
-          rm -rf "${WORKSPACE_SOURCE_PATH:?}"/*
-          # Delete hidden files (use single quotes to avoid YAML parsing issues)
-          rm -rf "${WORKSPACE_SOURCE_PATH}"/'.[!.]*'
-          rm -rf "${WORKSPACE_SOURCE_PATH}"/'..?*'
+        if [ -d "${WORKSPACE_SOURCE_PATH}" ]; then
+          # Delete all files and folders (including hidden ones) safely, excluding '.' and '..'
+          find "${WORKSPACE_SOURCE_PATH}" -mindepth 1 -exec rm -rf {} +
         fi
         echo "Cleanup completed successfully."
 ---
