@@ -20,12 +20,12 @@ spec:
       script: |
         #!/usr/bin/env sh
         set -eu
-        echo "Removing all files from ${WORKSPACE_SOURCE_PATH} ..."
+        echo 'Removing all files from ${WORKSPACE_SOURCE_PATH} ...'
         if [ -d "${WORKSPACE_SOURCE_PATH}" ]; then
-          # Delete all files and folders (including hidden ones) safely, excluding '.' and '..'
           find "${WORKSPACE_SOURCE_PATH}" -mindepth 1 -exec rm -rf {} +
         fi
-        echo "Cleanup completed successfully."
+        echo 'Cleanup completed successfully.'
+
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
